@@ -1,0 +1,54 @@
+package com.movie.app.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+
+import com.movie.app.model.Movie;
+
+@Repository
+public interface MovieRepository extends JpaRepository<Movie,Integer>{
+
+@Query("SELECT  SUM(r.rating) FROM Review r WHERE r.movie.movieId=:id GROUP BY r.movie.movieId")
+	public double getTotalRating(int id);
+
+
+	
+	
+@Query("SELECT COUNT(r.user.userId) FROM Review r WHERE r.movie.movieId =:id")
+	public int getTotalNumber(@Param("id")int id);
+
+
+@Query("SELECT m FROM Movie m WHERE m.movieTitle LIKE %?1%"
+            + " OR m.actor1_name LIKE %?1%"
+            + " OR m.actor2_name LIKE %?1%"
+            + " OR m.director LIKE %?1%")
+           
+public List<Movie> search(String keyword);
+
+@Query(value ="SELECT * FROM Movie ORDER BY movieReleaseDate DESC LIMIT 4", nativeQuery = true)  
+public List<Movie> getNewMovies();
+
+@Query(value ="SELECT * FROM Movie ORDER BY movieReleaseDate DESC LIMIT 16", nativeQuery = true)  
+public List<Movie> getAllNewMovies();
+
+@Query(value ="SELECT movie_movieId, COUNT(*) FROM Review GROUP BY movie_movieId HAVING COUNT(*)>=4 LIMIT 4", nativeQuery = true) 
+public List<Integer> findTrendingMovieId();
+
+@Query(value ="SELECT movie_movieId, COUNT(*) FROM Review GROUP BY movie_movieId HAVING COUNT(*)>=4 LIMIT 16", nativeQuery = true) 
+public List<Integer> findAllTrendingMovieId();
+
+
+@Query("SELECT m FROM Movie m where m.movieTitle =?1")
+public Movie findByTitle(String movie_title);
+
+@Query(value="SELECT movie_movieId, rating FROM review WHERE rating>=4 LIMIT 4", nativeQuery=true)
+public List<Integer> findHighlyRatedMovieId();
+
+@Query(value="SELECT movie_movieId, rating FROM review WHERE rating>=4 LIMIT 16", nativeQuery=true)
+public List<Integer> findAllHighlyRatedMovieId();
+}

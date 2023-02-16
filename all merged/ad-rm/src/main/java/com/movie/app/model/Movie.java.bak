@@ -1,0 +1,190 @@
+package com.movie.app.model;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Movie {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int movieId;
+	
+	@Column(name = "movie_poster")
+	private String moviePoster;
+	
+	@Column(name = "movie_title")
+	private String movieTitle;
+	
+	@Column(name = "movie_description")
+	private String movieDescription;
+	
+	@Column(name = "actor1_name")
+	private String actor1_name;
+	
+	@Column(name = "actor2_name")
+	private String actor2_name;
+	
+	@Column(name = "content_rating")
+	private String content_rating;
+	
+	@Column(name = "director")
+	private String director;
+	
+	@Column(name = "movie_release_date")
+	private String movieReleaseDate;
+	
+	@Column(name = "movie_category")
+	private String movieCategory;
+	
+	@OneToMany(mappedBy="movie")
+	private List<Review> reviews;
+	
+	public Movie() {
+		
+	}
+	
+	public Movie(String moviePoster, String movieTitle, String movieDescription, String actor1_name, String actor2_name,
+			String content_rating, String director, String movieReleaseDate) {
+		super();
+		this.moviePoster = moviePoster;
+		this.movieTitle = movieTitle;
+		this.movieDescription = movieDescription;
+		this.actor1_name = actor1_name;
+		this.actor2_name = actor2_name;
+		this.content_rating = content_rating;
+		this.director = director;
+		this.movieReleaseDate = movieReleaseDate;
+	}
+
+
+	public Movie(String moviePoster, String movieTitle, String movieDescription, String actor1_name, String actor2_name,
+			String content_rating, String director, String movieReleaseDate, String movieCategory) {
+		super();
+		this.moviePoster = moviePoster;
+		this.movieTitle = movieTitle;
+		this.movieDescription = movieDescription;
+		this.actor1_name = actor1_name;
+		this.actor2_name = actor2_name;
+		this.content_rating = content_rating;
+		this.director = director;
+		this.movieReleaseDate = movieReleaseDate;
+		this.movieCategory = movieCategory;
+	}
+
+
+	public Movie(String moviePoster, String movieTitle, String movieDescription, String actor1_name,
+			String actor2_name, String content_rating, String director, String movieReleaseDate,
+			String movieCategory, List<Review> reviews) {
+		super();
+		this.moviePoster = moviePoster;
+		this.movieTitle = movieTitle;
+		this.movieDescription = movieDescription;
+		this.actor1_name = actor1_name;
+		this.actor2_name = actor2_name;
+		this.content_rating = content_rating;
+		this.director = director;
+		this.movieReleaseDate = movieReleaseDate;
+		this.movieCategory = movieCategory;
+		this.reviews = reviews;
+	}
+	
+
+	public String getActor1_name() {
+		return actor1_name;
+	}
+
+	public void setActor1_name(String actor1_name) {
+		this.actor1_name = actor1_name;
+	}
+
+	public String getActor2_name() {
+		return actor2_name;
+	}
+
+	public void setActor2_name(String actor2_name) {
+		this.actor2_name = actor2_name;
+	}
+
+	public String getContent_rating() {
+		return content_rating;
+	}
+	
+	public void setContent_rating(String content_rating) {
+		this.content_rating = content_rating;
+	}
+
+	public String getMovieReleaseDate() {
+		return movieReleaseDate;
+	}
+
+	public void setMovieReleaseDate(String movieReleaseDate) {
+		this.movieReleaseDate = movieReleaseDate;
+	}
+
+
+	public int getMovieId() {
+		return movieId;
+	}
+
+	public void setMovieId(int movieId) {
+		this.movieId = movieId;
+	}
+
+	public String getMoviePoster() {
+		return moviePoster;
+	}
+
+	public void setMoviePoster(String moviePoster) {
+		this.moviePoster = moviePoster;
+	}
+
+	public String getMovieTitle() {
+		return movieTitle;
+	}
+
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
+	}
+
+	public String getMovieDescription() {
+		return movieDescription;
+	}
+
+	public void setMovieDescription(String movieDescription) {
+		this.movieDescription = movieDescription;
+	}
+
+	public String getDirector() {
+		return director;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
+	}
+
+
+	public String getMovieCategory() {
+		return movieCategory;
+	}
+
+	public void setMovieCategory(String movieCategory) {
+		this.movieCategory = movieCategory;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+
+
+}

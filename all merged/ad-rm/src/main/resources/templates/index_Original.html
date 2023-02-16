@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" media="all" th:href="@{/bootstrap/css/bootstrap.min.css}"
+		href="/bootstrap/css/bootstrap.min.css" type="text/css" />
+	<link rel="stylesheet" media="all" th:href="@{/css/site.css}" href="/bootstrap/css/bootstrap.min.css"
+		type="text/css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<body>
+
+    <style>
+           
+        img{
+        
+          margin-right:15px;
+        }
+        
+    </style>
+    
+	<div class="container">
+
+		<div class="row my-3">
+			<div class="col">
+				<h2>Search Movies</h2>
+			</div>
+
+            
+            
+            <div>&nbsp;</div>
+
+            <div>
+			<form th:action="@{/movies/search}" method="get">
+                <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" placeholder="Find by Movie title, actor, or directors" required />
+                &nbsp;
+                <input type="submit" value="Search" />
+                &nbsp;
+                <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+            </form>
+            </div>
+
+            <div>&nbsp;</div>
+
+            <div class="col">
+				<h2>Movie List</h2>
+			</div>
+
+      	</div>	
+	        <tbody>
+             
+		        <tr th:each="movie : ${movieList}" class="listRecord">                       
+                    <td class="img-with-text">
+                        <td class="text-center"><img th:src="@{'images/'+${movie.moviePoster}}" style="width: 150px;height: 150px;"></td>
+                        <p class="text-left" th:text="${movie.movieTitle}"></p>
+
+                      
+                    </td>                      
+		        </tr>
+                </div>
+	        </tbody>   
+
+        <div>&nbsp;</div>
+
+        <div>&nbsp;</div>
+      
+        <div class="col">
+            <h2>Upcoming Movies</h2>
+        </div>
+        
+        <tbody>
+
+		<tr th:each="movie : ${newMovieList}" class="listRecored">                  
+                    <td class="text-center"><img th:src="@{'images/'+${movie.moviePoster}}" style="width: 150px;height: 150px;"></td>
+    	</tr>
+	</tbody>
+
+    <div>&nbsp;</div>
+
+    <div>&nbsp;</div>
+
+    <div class="col">
+        <h2>Recommended movies for you</h2>
+    </div>
+
+    <div>
+        <form th:action="@{/movies/search}" method="get">
+            <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" placeholder="Find recommended movies" required />
+            &nbsp;
+            <input type="submit" value="Search" />
+            &nbsp;
+            <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+        </form>
+       
+       
+    </div>
+
+    <div>&nbsp;</div>
+    
+    <div>&nbsp;</div>
+
+</body>
+
+</html>
